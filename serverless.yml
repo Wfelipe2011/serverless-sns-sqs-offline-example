@@ -2,7 +2,7 @@ service: sns-sqs-offline-example
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs16.x
   region: ap-southeast-1
   stage: ${opt:stage, "development"}
   profile: default
@@ -35,6 +35,8 @@ custom:
 
   serverless-offline: 
     port: 3200
+    region: ap-southeast-1
+    endpoint: http://0.0.0.0:9324
 
   serverless-offline-sns:
     port: 4002

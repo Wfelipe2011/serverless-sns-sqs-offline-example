@@ -21,7 +21,7 @@ async function handler(event) {
 	let body;
 
 	try {
-		console.log(event.body)
+		console.log("Action", event.body)
 		const { error, value } = Joi.validate(
 			event.body,
 			bodySchema,
@@ -32,9 +32,11 @@ async function handler(event) {
 
 		const sns = new AWS.SNS({
 			endpoint: process.env.NODE_ENV === "production" ? undefined : "http://127.0.0.1:4002",
-			region: process.env.AWS_DEPLOY_REGION,
+			config: {
+				region: "ap-southeast-1",
+			}
 		});
-		console.log(body)
+		console.log("Action", body)
 
 		await sns.publish({
 			Message: JSON.stringify(body),
